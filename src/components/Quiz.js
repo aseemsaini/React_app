@@ -4,7 +4,10 @@ import { useContext} from "react";
 
 const Quiz = () => {
     const [quizState, dispatch] = useContext(QuizContext)
-    console.log("QuizState", quizState)
+
+    if (!quizState) {
+        return <div>Loading...</div>;
+      }
 
     return (
     <div className = "quiz">
@@ -13,7 +16,7 @@ const Quiz = () => {
             <div className="congratulations">Congratulations</div>
             <div className="results-info">
                 <div>You have completed the quiz.</div>
-                <div>You have got 5 out of {quizState.questions.length} correct!</div>
+                <div>You have got {quizState.correctAnswerCount} out of {quizState.questions.length} correct!</div>
             </div>
             <div className="next-button" 
             onClick={() => dispatch({type: "RESTART"})}>Restart</div>
